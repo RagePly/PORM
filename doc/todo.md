@@ -5,4 +5,5 @@
   - [ ] Measurement arithmetic operators
   - [ ] Create database structure with JSON
   - [ ] Implement the JSON parser
+- [ ] Create function that explicitly fills in implicit conversions
 - [ ] Database boilerplate code
