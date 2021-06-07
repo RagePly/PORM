@@ -1,0 +1,7 @@
+name = "PORM"
+uuid = "666ed08a-1f19-48e6-8b25-091044333096"
+authors = ["TheHugo <the.hugo.lom@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
