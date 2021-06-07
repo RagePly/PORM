@@ -5,6 +5,7 @@
   - [Recipy Manager](#recipy-manager)
   - [Purchase optimizer](#purchase-optimizer)
   - [Miscellaneous](#miscellaneous)
+- [Function](#function)
 
 ## Description
 PORM is an application in two forms, a recipy manager that is mainly used to store recipy sizes and a purchase optimizer that will optimize and craft a shopping-list depending on price, recipy nutrients etc.
@@ -43,3 +44,5 @@ PORM is an application in two forms, a recipy manager that is mainly used to sto
 
 ### Miscellaneous
 - Generate a cooking scheduele from a recipy list based on ingredient expiry dates, available time, number of portions
+  
+## Function
