@@ -1,24 +1,25 @@
 module Measurements
 
+include("defines/units.jl")
 using Base: Float64
+
 export Measurement
 
 struct Measurement
     amount::Float64
-    type::String # volume, weight etc
-    conv::Dict{String,Float64}
+    is_weight::Bool
 end
 
-function get_conversions(type::String, conv_db::Dict{String,Dict{String,Float64}})::Dict{String,Float64}
-    if isempty(conv_db) || type ∉ keys(conv_db)
-        return Dict{String,Float64}()
+function Measurement(amount::Float64,unit::Symbol)
+    if Units.is_unit(unit)
+        if Units.is_weight(unit)
+            return Measurement(Units.convert_weight(amount,unit),true) # save as kg
+        else
+            return Measurement(Units.convert_volume(amount,unit),false) # save as l
+        end
     else
-        return deepcopy(conv_db[type])
+        error("Invalid unit $unit")
     end
-end
-
-function Measurement(x::Float64, type::String; conv_db::Dict{String,Dict{String,Float64}} = Dict{String,Dict{String,Float64}}())
-    return Measurement(x,type,get_conversions(type,conv_db))
 end
 
 end

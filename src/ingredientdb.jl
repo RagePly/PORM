@@ -1,23 +1,21 @@
 module IngredientDatabase
 import JSON
 
-function validate_conversion(json::Dict{String,Any})::Bool
-    if !all(k -> isa(k,String),keys(json))
-        return false
-    else
-        for v in values(json)
-            if !all(p::Pair -> isa(p.first, String) && isa(p.second,Float64), collect(v))
-                return false
-            end
-        end
-        return true
-    end
+struct Ingredients
+    database::Dict{String,Vector{Float64}}
 end
 
-function parse_database(filename::AbstractString)::Dict{String,Dict{String,Dict{String,Float64}}}
-    db = JSON.parsefile(filename)
-    if !(all(k -> isa(k,String), keys(db)) && all(conv -> validate_conversion(conv), values(db)))
-        return Dict{String,Dict{String,Dict{String,Float64}}}()
+function Ingredients(filename::AbstractString)::Ingredients
+    return Ingredients(parse_database(filename))
+end
+
+function parse_database(filename::AbstractString)::Dict{String,Vector{Float64}}
+    json_str = open(f->read(f,String),filename)
+    db = JSON.parse(json_str; inttype=Float64)
+    try
+        db = convert(Dict{String,Vector{Float64}}, db)
+    catch
+        return Dict{String,Vector{Float64}}()
     end
     return db
 end
